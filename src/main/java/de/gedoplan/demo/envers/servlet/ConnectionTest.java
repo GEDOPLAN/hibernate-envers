@@ -6,6 +6,7 @@
 package de.gedoplan.demo.envers.servlet;
 
 import de.gedoplan.demo.envers.repository.OrderRepository;
+import de.gedoplan.demo.envers.system.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.inject.Inject;
@@ -24,6 +25,10 @@ public class ConnectionTest extends HttpServlet {
 
     @Inject
     private OrderRepository repo;
+
+    @Inject
+    @User
+    private String username;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,6 +51,7 @@ public class ConnectionTest extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Order count: " + repo.getAll().size());
+            out.println("<h1>Username; " + username);
             out.println("</body>");
             out.println("</html>");
         }

@@ -5,4 +5,6 @@ Hibernate Envers - Entity Auditing Demo
 ![alt text](https://github.com/GEDOPLAN/hibernate-envers/blob/master/docs/title.png "title")
 
 
-
+Beinhaltet:
+ * Verwendung von @Audited
+ * zusätzliche Revision Daten mit @RevisionEntity, DefaultRevisionEntity, RevisionListener
