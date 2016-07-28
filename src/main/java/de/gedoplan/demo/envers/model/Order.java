@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 
@@ -33,10 +34,13 @@ public class Order {
     @ManyToOne
     private Employee employee;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date orderDate;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date requiredDate;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date shippedDate;
 
     private Double freight;
