@@ -6,6 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.hibernate.envers.Audited;
 
+/**
+ * Produkte.
+ *
+ * @author Dominik Mathmann
+ */
 @Entity
 public class Product {
 

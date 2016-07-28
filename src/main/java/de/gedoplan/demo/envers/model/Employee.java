@@ -10,6 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.hibernate.envers.Audited;
 
+/**
+ * Mitarbeiter.
+ *
+ * @author Dominik Mathmann
+ */
 @Entity
 @Audited
 public class Employee {

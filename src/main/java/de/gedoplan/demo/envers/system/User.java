@@ -11,6 +11,7 @@ import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Qualifier;
 
 /**
+ * User Qualifier für den Producer der den aktuellen Benutzer liefert.
  *
  * @author Dominik Mathmann
  */
@@ -19,6 +20,10 @@ import javax.inject.Qualifier;
 @Target({METHOD, FIELD, PARAMETER, TYPE})
 public @interface User {
 
+    /**
+     * AnnotationLiteral um den korrekten Typ über den Bean-Manager zu
+     * ermitteln.
+     */
     class UserQualifier extends AnnotationLiteral<User>
             implements User {
     }

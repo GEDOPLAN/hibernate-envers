@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
 import org.junit.Before;
 
 /**
- * Test Order Repository
+ * Test Product Repository mit erweitertem Auslesen von Revision Informationen.
  *
  * @author Dominik Mathmann
  */
@@ -56,9 +56,12 @@ public class TestProductRepository extends TestBaseClass {
         AuditReader auditReader = AuditReaderFactory.get(entityManager);
         List<Number> revisions = auditReader.getRevisions(Product.class, product.getProductID());
 
+        // Revision-Objekt und zusätzliche Daten auf Basis der ID und der ersten Revision ermitteln.
         AuditQuery revQuery = auditReader.createQuery().forRevisionsOfEntity(Product.class, false, true);
         revQuery.add(AuditEntity.revisionNumber().eq(revisions.get(0)));
         revQuery.add(AuditEntity.id().eq(product.getProductID()));
+
+        // liefert Objekt Array mit Entät, RevisionObjekt und RevisionType
         Object[] revObject = (Object[]) revQuery.getSingleResult();
 
         Product revProduct = (Product) revObject[0];

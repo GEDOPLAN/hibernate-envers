@@ -9,6 +9,12 @@ import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.envers.RevisionEntity;
 
 /**
+ * Entität um zusätliche Informationen zu jeder Revision zu speichern. Neben den
+ * Standard-Informationen fügen wir hier z.B. den Benutzernamen und ein
+ * Änderungsdatum ein.
+ *
+ * Das eigentliche Setzen dieser Informationen erfolgt im Referenzierten
+ * Listener.
  *
  * @author Dominik Mathmann
  */

@@ -7,6 +7,7 @@ import javax.enterprise.inject.spi.CDI;
 import org.hibernate.envers.RevisionListener;
 
 /**
+ * Listener um die zusätzliche Revision-Daten zu füllen.
  *
  * @author Dominik Mathmann
  */
@@ -19,6 +20,12 @@ public class RevisionDataListener implements RevisionListener {
         revData.setUsername(getUsername());
     }
 
+    /**
+     * Kein gültiges CDI-Injektionsziel, aus diesem Grund der "Umweg" über den
+     * Beanmanager.
+     *
+     * @return aktueller Benutzer
+     */
     private String getUsername() {
         Instance<String> select = CDI.current().select(String.class, new User.UserQualifier() {
         });

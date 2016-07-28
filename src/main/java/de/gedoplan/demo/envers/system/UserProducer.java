@@ -4,6 +4,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
 /**
+ * Producer der den Benutzer ermittelt, hier nur ein Dummy-Beispiel.
  *
  * @author Dominik Mathmann
  */
