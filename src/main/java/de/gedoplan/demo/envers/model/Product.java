@@ -10,13 +10,13 @@ import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 
 @Entity
-@Audited
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productID;
 
+    @Audited
     private String productName;
 
     private String quantityPerUnit;
@@ -29,16 +29,16 @@ public class Product {
 
     private Short reorderLevel;
 
-    @OneToMany(mappedBy = "product")
-    @NotAudited
-    private List<OrderDetail> orderDetail;
-
     public Integer getProductID() {
         return productID;
     }
 
     public void setProductID(Integer productID) {
         this.productID = productID;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     public void setProductName(String productName) {
@@ -85,14 +85,6 @@ public class Product {
         this.reorderLevel = reorderLevel;
     }
 
-    public List<OrderDetail> getOrderDetail() {
-        return orderDetail;
-    }
-
-    public void setOrderDetail(List<OrderDetail> orderDetail) {
-        this.orderDetail = orderDetail;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -110,6 +102,11 @@ public class Product {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" + "productID=" + productID + ", productName=" + productName + ", quantityPerUnit=" + quantityPerUnit + ", unitPrice=" + unitPrice + ", unitsInStock=" + unitsInStock + ", unitsOnOrder=" + unitsOnOrder + ", reorderLevel=" + reorderLevel + '}';
     }
 
 }

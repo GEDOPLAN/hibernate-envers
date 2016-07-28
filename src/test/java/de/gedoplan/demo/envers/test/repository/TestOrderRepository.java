@@ -76,7 +76,7 @@ public class TestOrderRepository extends TestBaseClass {
         Assert.assertTrue(revOrder.getShipName().equals(oldShipName));
 
         //Revert to First Revision
-        order = orderRepository.merge(order);
-        Assert.assertEquals(orderRepository.findById(order.getOrderID()).getShipName(), "D12005");
+        order = orderRepository.merge(revOrder);
+        Assert.assertEquals(orderRepository.findById(order.getOrderID()).getShipName(), oldShipName);
     }
 }
