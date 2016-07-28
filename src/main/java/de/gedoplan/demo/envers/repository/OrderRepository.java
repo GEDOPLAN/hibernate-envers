@@ -1,6 +1,6 @@
-package de.gedoplan.demo.hibernateember.repository;
+package de.gedoplan.demo.envers.repository;
 
-import de.gedoplan.demo.hibernateember.model.Order;
+import de.gedoplan.demo.envers.model.Order;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 

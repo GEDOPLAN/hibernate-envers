@@ -1,4 +1,4 @@
-package de.gedoplan.demo.hibernateember.model;
+package de.gedoplan.demo.envers.model;
 
 import java.util.Date;
 import java.util.List;
@@ -8,8 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import org.hibernate.envers.Audited;
 
 @Entity
+@Audited
 public class Employee {
 
     @Id

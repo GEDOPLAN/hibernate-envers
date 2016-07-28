@@ -1,6 +1,5 @@
-package de.gedoplan.demo.hibernateember.model;
+package de.gedoplan.demo.envers.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -8,9 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 /**
  * Bestellungen
@@ -19,6 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ORDERTBL")
+@Audited
 public class Order {
 
     @Id
@@ -26,6 +27,7 @@ public class Order {
     private Integer orderID;
 
     @OneToMany(mappedBy = "order")
+    @NotAudited
     private List<OrderDetail> orderDetails;
 
     @ManyToOne

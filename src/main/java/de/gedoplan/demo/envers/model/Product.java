@@ -1,4 +1,4 @@
-package de.gedoplan.demo.hibernateember.model;
+package de.gedoplan.demo.envers.model;
 
 import java.util.List;
 import javax.persistence.Entity;
@@ -6,8 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 @Entity
+@Audited
 public class Product {
 
     @Id
@@ -27,6 +30,7 @@ public class Product {
     private Short reorderLevel;
 
     @OneToMany(mappedBy = "product")
+    @NotAudited
     private List<OrderDetail> orderDetail;
 
     public Integer getProductID() {

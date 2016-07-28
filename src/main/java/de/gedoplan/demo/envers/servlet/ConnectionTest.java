@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.gedoplan.demo.hibernateember.servlet;
+package de.gedoplan.demo.envers.servlet;
 
-import de.gedoplan.demo.hibernateember.repository.OrderRepository;
+import de.gedoplan.demo.envers.repository.OrderRepository;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.inject.Inject;

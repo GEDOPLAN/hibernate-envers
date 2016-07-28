@@ -1,4 +1,4 @@
-package de.gedoplan.demo.hibernateember.test;
+package de.gedoplan.demo.envers.test;
 
 import java.io.File;
 import java.util.UUID;
@@ -29,7 +29,7 @@ public class TestBaseClass {
                 .importBuildOutput().as(WebArchive.class);
 
         deployment
-                .addPackage("de.gedoplan.demo.hibernateember.test");
+                .addPackage("de.gedoplan.demo.envers.test");
         return deployment;
     }
 

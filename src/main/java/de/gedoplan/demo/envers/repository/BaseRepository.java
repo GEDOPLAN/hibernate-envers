@@ -1,4 +1,4 @@
-package de.gedoplan.demo.hibernateember.repository;
+package de.gedoplan.demo.envers.repository;
 
 import java.util.List;
 import javax.persistence.EntityManager;
