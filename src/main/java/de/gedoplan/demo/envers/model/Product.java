@@ -1,13 +1,10 @@
 package de.gedoplan.demo.envers.model;
 
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
 
 @Entity
 public class Product {
@@ -53,43 +50,36 @@ public class Product {
         this.quantityPerUnit = quantityPerUnit;
     }
 
-    public double getUnitPrice() {
+    public Double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public short getUnitsInStock() {
+    public Short getUnitsInStock() {
         return unitsInStock;
     }
 
-    public void setUnitsInStock(short unitsInStock) {
+    public void setUnitsInStock(Short unitsInStock) {
         this.unitsInStock = unitsInStock;
     }
 
-    public short getUnitsOnOrder() {
+    public Short getUnitsOnOrder() {
         return unitsOnOrder;
     }
 
-    public void setUnitsOnOrder(short unitsOnOrder) {
+    public void setUnitsOnOrder(Short unitsOnOrder) {
         this.unitsOnOrder = unitsOnOrder;
     }
 
-    public short getReorderLevel() {
+    public Short getReorderLevel() {
         return reorderLevel;
     }
 
-    public void setReorderLevel(short reorderLevel) {
+    public void setReorderLevel(Short reorderLevel) {
         this.reorderLevel = reorderLevel;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (productID != null ? productID.hashCode() : 0);
-        return hash;
     }
 
     @Override

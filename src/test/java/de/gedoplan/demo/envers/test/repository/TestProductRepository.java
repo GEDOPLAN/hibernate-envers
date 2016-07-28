@@ -1,14 +1,9 @@
 package de.gedoplan.demo.envers.test.repository;
 
-import de.gedoplan.demo.envers.model.Order;
-import de.gedoplan.demo.envers.model.Order_;
 import de.gedoplan.demo.envers.model.Product;
 import de.gedoplan.demo.envers.model.Product_;
-import de.gedoplan.demo.envers.repository.OrderRepository;
 import de.gedoplan.demo.envers.repository.ProductRepository;
 import de.gedoplan.demo.envers.test.TestBaseClass;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
