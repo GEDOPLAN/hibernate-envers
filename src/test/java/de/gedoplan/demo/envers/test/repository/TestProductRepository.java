@@ -1,5 +1,6 @@
 package de.gedoplan.demo.envers.test.repository;
 
+import de.gedoplan.demo.envers.model.Employee;
 import de.gedoplan.demo.envers.model.Product;
 import de.gedoplan.demo.envers.model.Product_;
 import de.gedoplan.demo.envers.model.RevisionData;
@@ -9,7 +10,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import junit.framework.Assert;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
@@ -93,5 +93,36 @@ public class TestProductRepository extends TestBaseClass {
 
         Assert.assertTrue(revProduct.getProductName().equals(product.getProductName()));
         Assert.assertTrue(revProduct.getProductID().equals(product.getProductID()));
+    }
+
+    @Test
+    public void testCascadeRevision() {
+        Product product = new Product();
+        product.setProductName("Product 1");
+        product.setQuantityPerUnit("stk");
+        product.setUnitPrice(122.2);
+
+        Employee employee = new Employee();
+        employee.setFirstName("Name 1");
+        product.setEmployee(employee);
+        product = productRepository.merge(product);
+
+        product.setProductName("Product 2");
+        product.getEmployee().setFirstName("Name 2");
+        product = productRepository.merge(product);
+
+        product.setProductName("Product 3");
+        product = productRepository.merge(product);
+
+        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        AuditQuery revQuery = auditReader.createQuery().forRevisionsOfEntity(Product.class, false, true);
+        revQuery.add(AuditEntity.id().eq(product.getProductID()));
+        List<Object[]> resultList = revQuery.getResultList();
+
+        Object[] merge2 = resultList.get(1);
+        Assert.assertEquals(((Product) merge2[0]).getEmployee().getFirstName(), "Name 2");
+
+        Object[] merge3 = resultList.get(2);
+        Assert.assertEquals(((Product) merge3[0]).getEmployee().getFirstName(), "Name 2");
     }
 }

@@ -1,9 +1,11 @@
 package de.gedoplan.demo.envers.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import org.hibernate.envers.Audited;
 
 /**
@@ -30,6 +32,10 @@ public class Product {
     private Short unitsOnOrder;
 
     private Short reorderLevel;
+
+    @Audited
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Employee employee;
 
     public Integer getProductID() {
         return productID;
@@ -102,6 +108,14 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" + "productID=" + productID + ", productName=" + productName + ", quantityPerUnit=" + quantityPerUnit + ", unitPrice=" + unitPrice + ", unitsInStock=" + unitsInStock + ", unitsOnOrder=" + unitsOnOrder + ", reorderLevel=" + reorderLevel + '}';
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
 }
