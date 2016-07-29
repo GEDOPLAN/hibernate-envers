@@ -9,6 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import junit.framework.Assert;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
@@ -35,7 +36,7 @@ public class TestProductRepository extends TestBaseClass {
     EntityManager entityManager;
 
     @Before
-    public void createOrder() {
+    public void createProduct() {
         Product product = new Product();
         product.setProductName("Product 1");
         product.setQuantityPerUnit("stk");
@@ -70,5 +71,27 @@ public class TestProductRepository extends TestBaseClass {
 
         Assert.assertTrue(revProduct.getProductName().equals(oldName));
         Assert.assertEquals(revData.getUsername(), "Dummy-User");
+    }
+
+    @Test
+    public void testDelete() {
+        Product product = productRepository.getAll(Product_.productID, true).get(0);
+        product.setProductName("Should be deleted...");
+        product = productRepository.merge(product);
+        productRepository.delete(product);
+        Assert.assertTrue(productRepository.findByAttribute(Product_.productID, product.getProductID()).size() == 0);
+
+        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+
+        // letzten Stand vorm Löschen ermitteln
+        AuditQuery revQuery = auditReader.createQuery().forRevisionsOfEntity(Product.class, false, true);
+        revQuery.add(AuditEntity.revisionType().eq(RevisionType.MOD));
+        revQuery.add(AuditEntity.id().eq(product.getProductID()));
+        Object[] revObject = (Object[]) revQuery.getSingleResult();
+
+        Product revProduct = (Product) revObject[0];
+
+        Assert.assertTrue(revProduct.getProductName().equals(product.getProductName()));
+        Assert.assertTrue(revProduct.getProductID().equals(product.getProductID()));
     }
 }

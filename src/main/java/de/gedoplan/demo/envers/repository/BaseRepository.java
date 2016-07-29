@@ -8,7 +8,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
+import javax.transaction.Transactional;
 
+@Transactional(rollbackOn = Throwable.class)
 abstract class BasicRepository<ENTITY, ID> {
 
     @PersistenceContext(name = "default")
@@ -61,7 +63,12 @@ abstract class BasicRepository<ENTITY, ID> {
     }
 
     public void delete(Integer id) {
-        this.entityManager.remove(this.entityManager.getReference(entityClass, id));
+        ENTITY reference = this.entityManager.getReference(entityClass, id);
+        this.entityManager.remove(reference);
+    }
+
+    public void delete(ENTITY entity) {
+        this.entityManager.remove(this.entityManager.merge(entity));
     }
 
     public List<ENTITY> getAll() {

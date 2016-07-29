@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
  * @author Dominik Mathmann
  */
 @ApplicationScoped
-@Transactional(Transactional.TxType.REQUIRED)
+@Transactional(rollbackOn = Throwable.class)
 public class OrderRepository extends BasicRepository<Order, Integer> {
 
     public OrderRepository() {
